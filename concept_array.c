@@ -8,6 +8,39 @@ int main(){
 	
 	int i,j,n,op;
 	
+	
+//	blog function
+	
+	void input(){
+		printf("Input Code     : ");scanf("%d",&code[i]);
+		printf("Input Name     : ");fflush(stdin);gets(name[i]);
+		printf("Input Quantity : ");scanf("%d",&qty[i]);
+		printf("Input Price    : ");scanf("%f",&price[i]);
+		total[i] = qty[i]*price[i];
+		
+		// total <=10 => dis=5
+		// total <=25 => dis=10
+		// total >=25 => dis=15
+		
+		if(total[i]<=10){
+			discount[i] = 5;
+		}
+		else if(total[i]<=25){
+			discount[i] = 10;
+		}
+		else{
+			discount[i] = 15;
+		}
+		
+		pay[i] = total[i]-(total[i]*discount[i])/100;
+	}	
+
+	void output(){
+		printf("%d \t %s \t %d \t\t %.2f$ \t %.2f$ \t %d%% \t\t %.2f$\n"
+				,code[i],name[i],qty[i],price[i],total[i],discount[i],pay[i]);
+	}
+	
+	
 	do{
 		printf("-------- ||| PRODUCT MANAGEMENT SYSTEM ||| --------\n");
 		printf("1. Input \n");
@@ -23,41 +56,52 @@ int main(){
 			case 1:{
 				printf("---------| INPUT |-----------\n");
 				printf("Enter number of products: ");scanf("%d",&n);
-				for(i=0;i<n;i++){
-					printf("Input Code     : ");scanf("%d",&code[i]);
-					printf("Input Name     : ");fflush(stdin);gets(name[i]);
-					printf("Input Quantity : ");scanf("%d",&qty[i]);
-					printf("Input Price    : ");scanf("%f",&price[i]);
-					total[i] = qty[i]*price[i];
-					
-					// total <=10 => dis=5
-					// total <=25 => dis=10
-					// total >=25 => dis=15
-					
-					if(total[i]<=10){
-						discount[i] = 5;
-					}
-					else if(total[i]<=25){
-						discount[i] = 10;
-					}
-					else{
-						discount[i] = 15;
-					}
-					
-					pay[i] = total[i]-(total[i]*discount[i])/100;
-					
-					
+				for(i=0;i<n;i++){	
+					input();
 				}
 				break;
 			}
 			case 2:{
 				printf("---------| OUTPUT |-----------\n");
 				printf("Code \t Name \t Quantity \t Price \t Total \t Discount \t Payment\n");
-//				printf("%d \t %s \t %d \t\t %.2f$ \t %.2f$ \t %d \t\t %.2f$\n",111,"Coca",5,10,50,15,30);
 				for(i=0;i<n;i++){
-					printf("%d \t %s \t %d \t\t %.2f$ \t %.2f$ \t %d%% \t\t %.2f$\n"
-						,code[i],name[i],qty[i],price[i],total[i],discount[i],pay[i]);
+					output();
 				}		
+				break;
+			}
+			
+			case 3:{
+				int search;
+				int check = 0;
+				printf("Enter Code to search: ");scanf("%d",&search);
+				for(i=0;i<n;i++){
+					if(search == code[i]){
+						printf("Code \t Name \t Quantity \t Price \t Total \t Discount \t Payment\n");
+						output();
+						check=1;
+					}
+				}	
+				if(check==0){
+					puts("code not found...!");
+				}
+				break;
+			}
+			case 4:{
+				int update;
+				int check = 0;
+				printf("Enter Code to update: ");scanf("%d",&update);
+				for(i=0;i<n;i++){
+					if(update == code[i]){
+						input();
+						check=1;
+					}
+				}	
+				if(check==0){
+					puts("Update not success...!");
+				}
+				else{
+					puts("Update Success....!");
+				}
 				break;
 			}
 			
