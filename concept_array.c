@@ -1,4 +1,5 @@
 #include<stdio.h>
+#include<string.h>
 int main(){
 //	product data
 	int code[20];
@@ -71,6 +72,7 @@ int main(){
 			}
 			
 			case 3:{
+				printf("---------| SEARCH |-----------\n");
 				int search;
 				int check = 0;
 				printf("Enter Code to search: ");scanf("%d",&search);
@@ -87,6 +89,7 @@ int main(){
 				break;
 			}
 			case 4:{
+				printf("---------| UPDATE |-----------\n");
 				int update;
 				int check = 0;
 				printf("Enter Code to update: ");scanf("%d",&update);
@@ -104,7 +107,58 @@ int main(){
 				}
 				break;
 			}
-			
+			case 5:{
+				printf("---------| INSERT |-----------\n");
+				int insert;
+				int check = 0;
+				printf("Enter code to insert near: ");scanf("%d",&insert);
+				for(i=0;i<n;i++){
+					if(insert == code[i]){
+						for(j=n;j>i;j--){
+							code[j]     = code[j-1];
+							strcpy(name[j],name[j-1]);
+							qty[j]      = qty[j-1];
+							price[j]    = price[j-1];
+							total[j]    = total[j-1];
+							discount[j] = discount[j-1];
+							pay[j]      = pay[j-1]; 
+						}
+						n++;
+						input();
+						check = 1;
+						break;
+					}
+				}
+				if(check == 0){
+					puts("Insert not success...!");
+				}
+				else{
+					puts("Insert Success ...!");
+				}
+				break;
+			}
+			case 6:{
+				int deleted,check=0;
+				printf("---------| DELETE |-----------\n");
+				printf("Enter Code to Delete: ");scanf("%d",&deleted);
+				for(i=0;i<n;i++){
+					if(code[i]==deleted){
+						for(j=i;j<n-1;j++){
+							code[j]    = code[j+1];
+							strcpy(name[j],name[j+1]);
+							qty[j]     = qty[j+1];
+							price[j]   = price[j+1];
+							total[j]   = total[j+1];
+							discount[j]= discount[j+1];
+							pay[j]     = pay[j+1];
+						}
+						n--;
+						check = 1;
+						break;
+					}
+				}
+				break;
+			}
 		}
 	}while(1);
 }
