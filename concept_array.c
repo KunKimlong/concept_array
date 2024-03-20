@@ -157,6 +157,66 @@ int main(){
 						break;
 					}
 				}
+				if(check == 0){
+					puts("Delete not Success...!");
+				}
+				else{
+					puts("Delete success...!");
+				}
+				break;
+			}
+			case 7:{
+				int tcode;
+				char tname[20];
+				int tqty,tdis;
+				float tprice,ttotal,tpay;
+				
+				printf("---------| SORT |-----------\n");
+				for(i=0;i<n;i++){
+					for(j=i+1;j<n;j++){
+						if(pay[i]<pay[j]){
+							tcode   = code[i];
+							code[i] = code[j];
+							code[j] = tcode;
+							
+							strcpy(tname,name[i]);
+							strcpy(name[i],name[j]);
+							strcpy(name[j],tname);
+							
+							tqty   = qty[i];
+							qty[i] = qty[j];
+							qty[j] = tqty;
+							
+							tprice   = price[i];
+							price[i] = price[j];
+							price[j] = tprice;
+							
+							ttotal   = total[i];
+							total[i] = total[j];
+							total[j] = ttotal;
+							
+							tdis   = discount[i];
+							discount[i] = discount[j];
+							discount[j] = tdis;
+							
+							tpay   = pay[i];
+							pay[i] = pay[j];
+							pay[j] = tpay;
+							
+						}
+					}
+				}
+				puts("Sort Success...!");
+				break;
+			}
+			case 8:{
+				int add;
+				printf("How many product to add: ");scanf("%d",&add);
+				for(i=n;i<n+add;i++){
+					input();
+				}
+				n=n+add;
+				puts("Add Success...!");
 				break;
 			}
 		}
