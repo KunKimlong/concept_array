@@ -1,5 +1,6 @@
 #include<stdio.h>
 #include<string.h>
+#include<stdlib.h>
 int main(){
 //	product data
 	int code[20];
@@ -52,6 +53,7 @@ int main(){
 		printf("6. Delete \n");
 		printf("7. Sort\n");
 		printf("8. Add \n");
+		printf("9. Check out \n");
 		printf("please choose an option: ");scanf("%d",&op);
 		switch(op){
 			case 1:{
@@ -217,6 +219,38 @@ int main(){
 				}
 				n=n+add;
 				puts("Add Success...!");
+				break;
+			}
+			case 9:{
+				float total_cash = 0,cash_resive = 0,cash_return = 0;
+				char type_money[6];
+				for(i=0;i<n;i++){
+					total_cash = total_cash+pay[i];
+				}
+				printf("Total Money: %.2f$\n",total_cash);
+				printf("Total Money: %.2f KHR \n",total_cash*4100);
+				printf("->By(KHR/Dollar): ");scanf("%s",&type_money);
+				if(strcmp(type_money,"KHR")==0){
+					while(1){
+						printf("Input Money: ");scanf("%f",&cash_resive);
+						total_cash = total_cash*4100;
+						if(cash_resive>=total_cash){
+							cash_return = cash_resive-total_cash;
+							printf("Return Money: %.2f\n",cash_return);
+							exit(0);
+						}
+					}
+				}
+				else{
+					while(1){
+						printf("Input Money: ");scanf("%f",&cash_resive);
+						if(cash_resive>=total_cash){
+							cash_return = cash_resive-total_cash;
+							printf("Return Money: %.2f\n",cash_return);
+							exit(0);
+						}
+					}
+				}
 				break;
 			}
 		}
